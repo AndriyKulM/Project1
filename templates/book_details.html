@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book_details
+{% endblock %}
+
+{% block main %}
+<div class="center">
+  <h2>Book Details</h2>
+  <table class="table table-bordered">
+      <tr class="info">
+        <th class="text-left" style="width:25%">Title:</th>
+        <td class="text-left">{{ book_rows["title"] }}</td>
+      </tr>
+      <tr class="info">
+        <th class="text-left" style="width:25%">Author:</th>
+        <td class="text-left">{{ book_rows["author"] }}</td>
+      </tr>
+      <tr class="info">
+        <th class="text-left" style="width:25%">Publication year:</th>
+        <td class="text-left">{{ book_rows["year"] }}</td>
+      </tr>
+      <tr class="info">
+        <th class="text-left" style="width:25%">ISBN number:</th>
+        <td class="text-left">{{ book_rows["isbn"] }}</td>
+      </tr>
+      <tr class="info">
+        <th class="text-left" style="width:25%">Average rating (Goodreads):</th>
+        <td class="text-left">{{ book_data["average_rating"] }}</td>
+      </tr>
+      <tr class="info">
+        <th class="text-left" style="width:25%">Number of ratings (Goodreads):</th>
+        <td class="text-left">{{ book_data["work_ratings_count"] }}</td>
+      </tr>
+    </table>
+</div>
+
+  <h2>Reviews</h2>
+  {% for review in reviews_data %}
+      <div>
+        <p> name: {{ review["username"] }} rating: {{ review["rating"] }} <br> review: {{ review["review"] }}</p>
+      </div>
+  {% else %}
+      <div>
+        <p>No reviews.</p>
+      </div>
+  {% endfor %}
+
+  {% if not have_user_review %}
+    <h2>Add a review</h2>
+    <form action="{{ url_for('book_details', isbn = book_rows["isbn"]) }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <label for="rating">Rating (on a scale of 1 to 5):</label>
+                <input class="form-control" type="text" size="1" name="rating" placeholder="Rating">
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <input class="form-control" type="text" name="review" placeholder="Enter Review Here">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info" type="submit">Add Review</button>
+            </div>
+        </fieldset>
+    </form>
+  {% endif %}
+{% endblock %}

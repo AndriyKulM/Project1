@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('search') }}" method="post">
+        <fieldset>
+            <legend>Пошук книги</legend>
+            <p>Введіть ISBN книги, назву або автора книги для пошуку</p>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="search" placeholder="search a book" type="text"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-warning" type="submit">Search</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

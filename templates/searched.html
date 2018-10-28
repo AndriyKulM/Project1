@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    searched
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr class="info">
+                <th class="text-center">ISBN</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Author</th>
+                <th class="text-center">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for searchedbook in searchedbooks: %}
+            <tr>
+                <td class="text-center">{{ searchedbook['isbn'] }}</td>
+                <td class="text-center">{{ searchedbook['title'] }}</td>
+                <td class="text-center">{{ searchedbook['author'] }}</td>
+                <td class="text-center"><a href="{{ url_for('book_details', isbn=searchedbook['isbn']) }}">click_for_details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
